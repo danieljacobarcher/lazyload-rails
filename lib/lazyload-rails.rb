@@ -37,6 +37,7 @@ ActionView::Helpers::AssetTagHelper.module_eval do
   def image_tag(*attrs)
     options, args = extract_options_and_args(*attrs)
     image_html = rails_image_tag(*args)
+    binding.pry
 
     if options[:lazy]
       to_lazy_image(image_html)
