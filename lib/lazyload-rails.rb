@@ -59,7 +59,8 @@ ActionView::Helpers::AssetTagHelper.module_eval do
   def extract_options_and_args(*attrs)
     options = attrs.last.dup
     args = attrs
-
+    
+    binding.pry
     args.last.delete(:lazy)
 
     [options, args]
