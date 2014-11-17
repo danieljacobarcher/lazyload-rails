@@ -60,8 +60,7 @@ ActionView::Helpers::AssetTagHelper.module_eval do
     options = attrs.last.dup
     args = attrs
     
-    binding.pry
-    args.last.delete(:lazy)
+    args.last.delete(:lazy) if (args.length > 1) && args.last.include?(:lazy)
 
     [options, args]
   end
