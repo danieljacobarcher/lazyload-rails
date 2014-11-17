@@ -37,7 +37,6 @@ ActionView::Helpers::AssetTagHelper.module_eval do
   def image_tag(*attrs)
     options, args = extract_options_and_args(*attrs)
     image_html = rails_image_tag(*args)
-    binding.pry
 
     if options[:lazy]
       to_lazy_image(image_html)
@@ -58,10 +57,15 @@ ActionView::Helpers::AssetTagHelper.module_eval do
   end
 
   def extract_options_and_args(*attrs)
-    options = attrs.last.dup
-    args = attrs
-    
-    args.last.delete(:lazy) if (args.length > 1) && args.last.include?(:lazy)
+    if attrs.length > 1
+      options = attrs.last.dup
+      args = attrs
+      
+      args.last.delete(:lazy) if args.last.include?(:lazy)
+    else
+      options = {}
+      args = attrs
+    end
 
     [options, args]
   end
